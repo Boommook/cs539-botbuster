@@ -1,1 +1,5 @@
-twitter_human_bots_dataset.csv
+# Ignore all CSV files everywhere in the repository
+*.csv
+
+# Except for this specific dataset that will be used
+!data/raw/twitter_human_bots_dataset.csv
