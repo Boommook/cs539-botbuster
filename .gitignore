@@ -6,3 +6,14 @@
 
 # Except for the demo dataset used by the dashboard
 !data/processed/demo_accounts.csv
+
+
+# macOS system files
+.DS_Store
+
+# Jupyter notebook checkpoints (anywhere in the repo)
+**/.ipynb_checkpoints/
+
+# Python cache files (anywhere in the repo)
+**/__pycache__/
+*.pyc
