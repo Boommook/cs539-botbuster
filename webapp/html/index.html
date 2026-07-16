@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Botbuster Dashboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 24px;
+        background: #f7f9fc;
+        color: #1f2937;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        margin-bottom: 8px;
+      }
+
+      .status {
+        margin-bottom: 16px;
+        color: #4b5563;
+      }
+
+      iframe {
+        width: 100%;
+        min-height: 800px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        background: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Botbuster Dashboard</h1>
+      <p class="status" id="status">Loading dashboard...</p>
+      <iframe
+        id="dashFrame"
+        title="Hosted Dash App"
+        loading="lazy"
+        src=""
+        allow="fullscreen"
+      ></iframe>
+    </div>
+
+    <script>
+      const statusEl = document.getElementById('status');
+      const frameEl = document.getElementById('dashFrame');
+
+      fetch('./config.json')
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Unable to load config.json');
+          }
+          return response.json();
+        })
+        .then((config) => {
+          if (!config.dashAppUrl) {
+            throw new Error('dashAppUrl is missing from config.json');
+          }
+
+          frameEl.src = config.dashAppUrl;
+          statusEl.textContent = `Loading dashboard from ${config.dashAppUrl}`;
+        })
+        .catch((error) => {
+          statusEl.textContent = `Unable to load dashboard: ${error.message}`;
+          frameEl.style.display = 'none';
+        });
+    </script>
+  </body>
+</html>

@@ -7,16 +7,16 @@ def engineer_features(df):
     Returens a copy of the dataset containing the newly engineered feats
     """
     model_df = df.copy()
-
-    # convert the text target into int labels
-    model_df["account_is_bot"] = (
-        model_df["account_type"]
-        .map({
-            "human": 0,
-            "bot": 1
-        })
-        .astype(int)
-    )
+    if "account_is_bot" in model_df.columns:
+        # convert the text target into int labels
+        model_df["account_is_bot"] = (
+            model_df["account_type"]
+            .map({
+                "human": 0,
+                "bot": 1
+            })
+            .astype(int)
+        )
 
     # ---------------------------------------------------------
     # Clean/remove features
