@@ -3,3 +3,6 @@
 
 # Except for this specific dataset that will be used
 !data/raw/twitter_human_bots_dataset.csv
+
+# Except for the demo dataset used by the dashboard
+!data/processed/demo_accounts.csv
