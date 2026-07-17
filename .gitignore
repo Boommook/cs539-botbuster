@@ -7,9 +7,23 @@
 # Except for the demo dataset used by the dashboard
 !data/processed/demo_accounts.csv
 
+# Local Codex/agent state
+.agents/
+.codex/
+
+# Virtual environments
+venv/
+.venv/
+
+# Environment files
+.env
+.env.*
 
 # macOS system files
 .DS_Store
+
+# Windows system files
+Thumbs.db
 
 # Jupyter notebook checkpoints (anywhere in the repo)
 **/.ipynb_checkpoints/
@@ -17,3 +31,15 @@
 # Python cache files (anywhere in the repo)
 **/__pycache__/
 *.pyc
+*.pyo
+*.pyd
+
+# Test/type/coverage caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
