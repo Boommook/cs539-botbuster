@@ -9,7 +9,6 @@
 
 # Local Codex/agent state
 .agents/
-.codex/
 
 # Virtual environments
 venv/
