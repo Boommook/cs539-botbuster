@@ -1,22 +1,22 @@
 import numpy as np
 import pandas as pd
 
-def engineer_features(df):
+def engineer_features(df, add_log_features=True):
     """
     Clean, remove, and add features to the dataset.
     Returens a copy of the dataset containing the newly engineered feats
     """
     model_df = df.copy()
-    if "account_is_bot" in model_df.columns:
-        # convert the text target into int labels
-        model_df["account_is_bot"] = (
-            model_df["account_type"]
-            .map({
-                "human": 0,
-                "bot": 1
-            })
-            .astype(int)
-        )
+
+    # convert the text target into int labels
+    model_df["account_is_bot"] = (
+        model_df["account_type"]
+        .map({
+            "human": 0,
+            "bot": 1
+        })
+        .astype(int)
+    )
 
     # ---------------------------------------------------------
     # Clean/remove features
@@ -73,15 +73,16 @@ def engineer_features(df):
     # ---------------------------------------------------------
     # Log-transform skewed numeric features
     # ---------------------------------------------------------
-    skewed_cols = [
-        "followers_count",
-        "friends_count",
-        "favourites_count",
-        "statuses_count",
-        "average_tweets_per_day",
-    ]
-    for col in skewed_cols:
-        model_df[f"{col}_log"] = np.log1p(model_df[col])
+    if add_log_features:
+        skewed_cols = [
+            "followers_count",
+            "friends_count",
+            "favourites_count",
+            "statuses_count",
+            "average_tweets_per_day",
+        ]
+        for col in skewed_cols:
+            model_df[f"{col}_log"] = np.log1p(model_df[col])
 
     # ---------------------------------------------------------
     # Cast boolean columns to int (0/1) for modeling
