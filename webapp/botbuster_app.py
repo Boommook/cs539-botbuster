@@ -86,6 +86,11 @@ app = Dash(
 server = app.server
 
 
+@server.route("/ping")
+def ping():
+    return "pong", 200
+
+
 def display_name(column):
     return column.replace("_", " ").title()
 
