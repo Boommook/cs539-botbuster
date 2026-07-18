@@ -5,6 +5,14 @@ Twitter/X accounts are likely human-operated or automated bot accounts. The
 application uses account metadata, profile-completeness signals, posting
 activity, and engineered text features to classify accounts as `human` or `bot`.
 
+## Live Website
+
+The public website is available at:
+
+```text
+https://cs539-botbuster.onrender.com/
+```
+
 ## Project Features
 
 - About page with project description and team members
@@ -98,7 +106,6 @@ Recommended Render settings:
 ```text
 Language: Python 3
 Branch: main
-Root Directory: leave blank
 Build Command: pip install -r requirements.txt
 Start Command: gunicorn webapp.botbuster_app:server --bind 0.0.0.0:$PORT
 ```
