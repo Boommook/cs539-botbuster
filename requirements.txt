@@ -9,3 +9,4 @@ seaborn
 dash
 dash-ag-grid
 plotly
+gunicorn
