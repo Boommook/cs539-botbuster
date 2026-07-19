@@ -87,30 +87,74 @@ body {
 .nav-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .nav-radio {
-  display: none;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .nav-item {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
   cursor: pointer;
-  border-radius: 6px;
-  padding: 12px 14px;
+  border-radius: 8px;
+  padding: 13px 14px;
   color: #dbeafe;
-  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(203, 213, 225, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  font-weight: 700;
+  line-height: 1.2;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.nav-item::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  flex: 0 0 8px;
+  border-radius: 999px;
+  background: #64748b;
+  box-shadow: 0 0 0 4px rgba(100, 116, 139, 0.16);
 }
 
 .nav-item:hover {
-  background: var(--sidebar-soft);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(191, 219, 254, 0.38);
+  color: #ffffff;
+  transform: translateX(3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 10px 24px rgba(2, 6, 23, 0.18);
+}
+
+.nav-item:focus-within {
+  outline: 2px solid #93c5fd;
+  outline-offset: 2px;
 }
 
 .nav-item:has(input:checked) {
   background: #ffffff;
   color: #172033;
   font-weight: 700;
+  border-color: #ffffff;
+  transform: translateX(3px);
+  box-shadow: 0 14px 28px rgba(2, 6, 23, 0.24);
+}
+
+.nav-item:has(input:checked)::before {
+  background: var(--blue);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.16);
 }
 
 .main-content {
