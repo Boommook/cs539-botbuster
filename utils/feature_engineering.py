@@ -1,22 +1,23 @@
 import numpy as np
 import pandas as pd
 
+
 def engineer_features(df, add_log_features=True):
     """
     Clean, remove, and add features to the dataset.
-    Returens a copy of the dataset containing the newly engineered feats
+    Returns a copy of the dataset containing the newly engineered features.
     """
     model_df = df.copy()
 
-    # convert the text target into int labels
-    model_df["account_is_bot"] = (
-        model_df["account_type"]
-        .map({
-            "human": 0,
-            "bot": 1
-        })
-        .astype(int)
-    )
+    if "account_type" in model_df.columns:
+        model_df["account_is_bot"] = (
+            model_df["account_type"]
+            .map({
+                "human": 0,
+                "bot": 1
+            })
+            .astype(int)
+        )
 
     # ---------------------------------------------------------
     # Clean/remove features
@@ -36,18 +37,20 @@ def engineer_features(df, add_log_features=True):
     )
 
     # ---------------------------------------------------------
-    # Mssing-val features
+    # Missing-value features
     # ---------------------------------------------------------
-    model_df["description_missing"] = model_df["description"].isna()
-    model_df["location_unknown"] = (
-        df["location"].isna()
-        | df["location"].fillna("").str.lower().eq("unknown")
-    )
-    model_df["language_missing"] = df["lang"].isna()
+    description = df.get("description", pd.Series("", index=df.index)).fillna("")
+    location = df.get("location", pd.Series("", index=df.index))
+    language = df.get("lang", pd.Series("", index=df.index))
+    screen_name = df.get("screen_name", pd.Series("", index=df.index)).fillna("")
 
-    # text-based feats
-    description = df["description"].fillna("")
-    screen_name = df["screen_name"].fillna("")
+    model_df["description_missing"] = description.eq("")
+    model_df["location_unknown"] = (
+        location.isna()
+        | location.fillna("").str.lower().eq("unknown")
+        | location.fillna("").eq("")
+    )
+    model_df["language_missing"] = language.isna() | language.fillna("").eq("")
 
     # Description features
     model_df["description_length"] = description.str.len()
