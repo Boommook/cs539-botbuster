@@ -5,14 +5,6 @@ Twitter/X accounts are likely human-operated or automated bot accounts. The
 application uses account metadata, profile-completeness signals, posting
 activity, and engineered text features to classify accounts as `human` or `bot`.
 
-## Live Website
-
-The public website is available at:
-
-```text
-https://cs539-botbuster.onrender.com/
-```
-
 ## Project Features
 
 - About page with project description and team members
@@ -24,7 +16,7 @@ https://cs539-botbuster.onrender.com/
 
 ## Project Structure
 
-```text
+```
 cs539-botbuster/
   data/
     raw/
@@ -51,26 +43,32 @@ cs539-botbuster/
 
 ## Local Setup
 
-Create and activate a virtual environment, then install the project
-dependencies.
+Clone the GitHub repository, move into the project folder, create a virtual
+environment, and install the project dependencies from `requirements.txt`.
 
 ```powershell
+git clone https://github.com/Boommook/cs539-botbuster.git
+cd cs539-botbuster
 python -m venv venv
 .\venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
+The `requirements.txt` file installs the Python packages required to run the
+Dash dashboard, load the trained model, process uploaded account data, and
+generate the model diagnostic visualizations.
+
 ## Run Locally
 
+After installing the dependencies, start the dashboard from the `webapp`
+directory.
+
 ```powershell
-.\venv\Scripts\python.exe webapp\botbuster_app.py
+cd webapp
+python botbuster_app.py
 ```
 
-Open the dashboard at:
-
-```text
-http://127.0.0.1:8050/
-```
+Open the dashboard at [http://127.0.0.1:8050/].
 
 ## Input Data
 
@@ -88,7 +86,8 @@ regenerated, or the saved model becomes incompatible with the installed
 scikit-learn version.
 
 ```powershell
-.\venv\Scripts\python.exe scripts\train_model.py
+cd scripts
+python train_model.py
 ```
 
 The script saves:
@@ -97,21 +96,10 @@ The script saves:
 - `models/feature_columns.pkl`
 - `data/processed/demo_accounts.csv`
 
-## Deploy On Render
+## Live Website
 
-Create a Render **Web Service** connected to the GitHub repository.
-
-Recommended Render settings:
-
-```text
-Language: Python 3
-Branch: main
-Build Command: pip install -r requirements.txt
-Start Command: gunicorn webapp.botbuster_app:server --bind 0.0.0.0:$PORT
-```
-
-The repository includes `.python-version` so Render can use the intended Python
-runtime.
+The public website is available at
+[https://cs539-botbuster.onrender.com/](https://cs539-botbuster.onrender.com/).
 
 ## Notes
 
