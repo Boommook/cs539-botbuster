@@ -98,7 +98,7 @@ The script saves:
 
 ## Live Website
 
-The public website is available at
+The live public website is available for demo at
 [https://cs539-botbuster.onrender.com/](https://cs539-botbuster.onrender.com/).
 
 ## Notes
